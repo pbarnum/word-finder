@@ -1,0 +1,37 @@
+{
+    "name": "Unlok/word-finder",
+    "description": "Finds words within a 2D grid",
+    "type": "library",
+    "license": "GNU General Public License",
+    "keywords": [
+        "words",
+        "puzzle",
+        "solver",
+        "word grid"
+    ],
+    "authors": [
+        {
+            "name": "pbarnum",
+            "email": "patrickdbarnum@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "php": ">=5.5",
+        "mekras/php-speller": "^1.7"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2",
+        "phpmetrics/phpmetrics": "^2.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Unlok\\WordFinder\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Unlok\\WordFinder\\Tests\\": "tests/"
+        }
+    }
+}

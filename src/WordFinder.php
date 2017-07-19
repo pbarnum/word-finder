@@ -81,7 +81,16 @@ class WordFinder
      */
     protected function stopTime()
     {
-        $this->time = time() - $this->time;
+        $this->time = $this->getCurrentTime();
+    }
+
+    /**
+     * Calculates run time in seconds
+     */
+    protected function getCurrentTime()
+    {
+        $seconds = time() - $this->time;
+        return gmdate('H:i:s', $seconds);
     }
 
     /**
@@ -105,6 +114,8 @@ class WordFinder
 
                 $currentWordIndex = $this->board->getCurrentWordIndex();
                 $word = (string) $this->board->currentWord();
+
+                $this->writeToLog("[{$this->getCurrentTime()}] Found: $word");
 
                 $this->wordsProcessed[$row][$currentWordIndex] = $word;
 
@@ -149,7 +160,7 @@ class WordFinder
     protected function printStats()
     {
         $wordCount = $this->countWordsProcessed();
-        $str = "\nIt took {$this->time} seconds to process the game board.\nFound {$wordCount} words.\n";
+        $str = "\nIt took {$this->time} to process the game board.\nFound {$wordCount} words.\n";
         $str .= $this->formatWordsFound();
         self::writeToLog($str);
     }

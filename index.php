@@ -30,18 +30,33 @@ use Unlok\WordFinder\WordFinder;
 //   ['g', 'h', 't'],
 //];
 
-// puzzle Raccoon - 1
- $words = [
-     new Word(5), // pearl
-     new Word(4), // ruby
-     new Word(7), // diamond
- ];
- $grid = [
-     ['p', 'r', 'n', 'd'],
-     ['u', 'e', 'i', 'd'],
-     ['a', 'l', 'y', 'o'],
-     ['r', 'b', 'm', 'a'],
- ];
+// puzzle Alpha - 24
+$words = [
+  new Word(8),
+  new Word(7),
+  new Word(4),
+  new Word(6),
+];
+$grid = [
+  ['y', 'l', 'l', 'o', 'p'],
+  ['h', 'e', 'a', 'b', 'o'],
+  ['w', 'l', 'b', 'g', 'a'],
+  ['o', 'b', 'i', 'e', 's'],
+  ['o', 'c', 'k', 'n', 'l'],
+];
+
+// // puzzle Raccoon - 1
+// $words = [
+//     new Word(5), // pearl
+//     new Word(4), // ruby
+//     new Word(7), // diamond
+// ];
+// $grid = [
+//     ['p', 'r', 'n', 'd'],
+//     ['u', 'e', 'i', 'd'],
+//     ['a', 'l', 'y', 'o'],
+//     ['r', 'b', 'm', 'a'],
+// ];
 
 //$words = [new Word(4)];
 //$grid = [

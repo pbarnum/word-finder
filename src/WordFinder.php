@@ -52,6 +52,13 @@ class WordFinder
     protected static $logFile;
 
     /**
+     * Store all invalid words
+     *
+     * @var array
+     */
+    protected static $invalidWords = [];
+
+    /**
      * WordFinder constructor.
      *
      * @param Board $board
@@ -104,27 +111,31 @@ class WordFinder
         while (!$this->board->boardCompleted()) {
             $this->fillLetters();
 
-            if ($this->board->currentWord()->isValid()) {
-                // Increment $trackingIndex when a new Word in the same or lower index has been found
-                if ($this->board->getCurrentWordIndex() <= $this->trackingIndex) {
-                    ++$row;
-                }
+            if (!isset(self::$invalidWords[(string) $this->board->currentWord()])) {
+                if ($this->board->currentWord()->isValid()) {
+                    // Increment $trackingIndex when a new Word in the same or lower index has been found
+                    if ($this->board->getCurrentWordIndex() <= $this->trackingIndex) {
+                        ++$row;
+                    }
 
-                $this->trackingIndex = $this->board->getCurrentWordIndex();
+                    $this->trackingIndex = $this->board->getCurrentWordIndex();
 
-                $currentWordIndex = $this->board->getCurrentWordIndex();
-                $word = (string) $this->board->currentWord();
+                    $currentWordIndex = $this->board->getCurrentWordIndex();
+                    $word = (string)$this->board->currentWord();
 
-                $this->writeToLog("[{$this->getCurrentTime()}] Found: $word");
+                    $this->writeToLog("[{$this->getCurrentTime()}] Found: $word");
 
-                $this->wordsProcessed[$row][$currentWordIndex] = $word;
+                    $this->wordsProcessed[$row][$currentWordIndex] = $word;
 
-                // Go back a word and drop a Letter to continue
-                if ($this->board->allLettersUsed()) {
-                    $this->board->reverseHistory();
+                    // Go back a word and drop a Letter to continue
+                    if ($this->board->allLettersUsed()) {
+                        $this->board->reverseHistory();
+                    } else {
+                        $this->board->dropLetters();
+                        $this->board->nextWord();
+                    }
                 } else {
-                    $this->board->dropLetters();
-                    $this->board->nextWord();
+                    self::$invalidWords[(string) $this->board->currentWord()] = true;
                 }
             }
 
